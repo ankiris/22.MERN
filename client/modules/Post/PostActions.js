@@ -5,6 +5,7 @@ export const ADD_POST = 'ADD_POST';
 export const ADD_POSTS = 'ADD_POSTS';
 export const DELETE_POST = 'DELETE_POST';
 export const EDIT_POST = 'EDIT_POST';
+export const UPDATE_VOTES = 'UPDATE_VOTES';
 
 // Export Actions
 export function addPost(post) {
@@ -21,6 +22,7 @@ export function addPostRequest(post) {
         name: post.name,
         title: post.title,
         content: post.content,
+        voteCount: 0,
       },
     }).then(res => dispatch(addPost(res.post)));
   };
@@ -77,5 +79,23 @@ export function editPostRequest(cuid, post) {
         content: post.content,
       },
     }).then(() => dispatch(editPost(cuid, post)));
+  };
+}
+
+export function updateVotes(cuid, post) {
+  return {
+    type: UPDATE_VOTES,
+    cuid,
+    post,
+  };
+}
+
+export function updateVotesRequest(cuid, post) {
+  return dispatch => {
+    return callApi(`posts/${cuid}`, 'put', {
+      post: {
+        voteCount: post.voteCount,
+      },
+    }).then(() => dispatch(updateVotes(cuid, post)));
   };
 }
