@@ -9,6 +9,7 @@ export default {
     by: 'By',
     deletePost: 'Delete Post',
     createNewPost: 'Create new post',
+    voteCount: 'voteCount',
     authorName: 'Author\'s Name',
     postTitle: 'Post Title',
     postContent: 'Post Content',
